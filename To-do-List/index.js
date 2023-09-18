@@ -25,12 +25,12 @@ enterBtn.addEventListener("click", () => {
     let c = document.createElement("li");
     c.classList.add("listel");
     c.id = count;
-    c.innerHTML = value;
+    c.textContent = value;
     a.append(c);
     let d = document.createElement("button");
     d.classList.add("delete");
     d.id = count;
-    d.innerHTML = "X";
+    d.textContent = "X";
     a.append(d);
 
     document.getElementById("work").value = "";
@@ -59,12 +59,12 @@ document.addEventListener("keydown", (event) => {
       let c = document.createElement("li");
       c.classList.add("listel");
       c.id = count;
-      c.innerHTML = value;
+      c.textContent = value;
       a.append(c);
       let d = document.createElement("button");
       d.classList.add("delete");
       d.id = count;
-      d.innerHTML = "X";
+      d.textContent = "X";
       a.append(d);
 
       document.getElementById("work").value = "";
@@ -84,10 +84,17 @@ document.addEventListener("click", (event) => {
     let a = valueList.children;
 
     for (let i = 0; i < a.length; i++) {
-      if (a[i].id == elementId) {
-        valueList.removeChild(a[i]);
-        taskCounter--;
+      if (a[i].id == elementId){
+        if(a[i].firstElementChild.nextElementSibling.classList.contains("crossed")){
+          valueList.removeChild(a[i]);
+        }else{
+          valueList.removeChild(a[i]);
+          taskCounter--;
         updateCounter()
+
+        }
+        
+        
       }
     }
   }
@@ -96,18 +103,27 @@ document.addEventListener("click", (event) => {
   });
 
   document.addEventListener("click", (event) => {
-    if ((event.target.class = "tick")) {
+    if ((event.target.classList.contains("tick") )) {
       let elementIdChecked = event.target.id;
       let a = valueList.children
       for(let i = 0;i<a.length;i++){
         if(a[i].id == elementIdChecked){
-            console.log()
-            a[i].firstElementChild.nextElementSibling.classList.toggle("crossed")
+            let elemenetCheck = a[i].firstElementChild.nextElementSibling
+            console.log(elemenetCheck)
+            if(elemenetCheck.classList.contains("crossed") == false){
+              elemenetCheck.classList.add("crossed")
+              taskCounter--;
+              updateCounter()
+            }else{
+              elemenetCheck.classList.remove("crossed")
+              taskCounter++
+              updateCounter()
+            }
         }
       }
     }})
 
 
     function updateCounter(){
-        document.getElementById("counter").innerHTML = taskCounter
+        document.getElementById("counter").textContent = taskCounter
     }

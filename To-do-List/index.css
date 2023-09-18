@@ -96,6 +96,7 @@ ul{
 .tick{
     position: relative;
     right: 40px;
+    scale: 125%;
     
 }
 button{
@@ -108,7 +109,7 @@ button{
     right: 62px;
     width: 40px;
     padding: 1px;
-    background-color: rgb(201, 161, 238);
+    background-color: rgb(225, 161, 238);
     border: none;
     cursor: pointer;
     height: 45px;
